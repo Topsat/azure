@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: https://index.docker.io/v1/
-        username: ${{ secrets.AzureAppService_ContainerUsername_5ce06decbb8140e0b09777ccd3653e6b }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_4c0a1eff9d4142089233e468d63629bf }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_80e667baf08b485f85c539fcf15dbc32 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_3eec9bfe10774b279ce101cd5ca116d5 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_5ce06decbb8140e0b09777ccd3653e6b }}/wordpress:${{ github.sha }}
+        tags: index.docker.io/${{ secrets.AzureAppService_ContainerUsername_80e667baf08b485f85c539fcf15dbc32 }}/httpd:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'webapp-kader'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_487efdd067284629af0acc2133c64035 }}
-        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_5ce06decbb8140e0b09777ccd3653e6b }}/wordpress:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_90b3ca88e652448c8359b760ae8319eb }}
+        images: 'index.docker.io/${{ secrets.AzureAppService_ContainerUsername_80e667baf08b485f85c539fcf15dbc32 }}/httpd:${{ github.sha }}'
